@@ -10,8 +10,6 @@ const PORT = process.env.PORT || 5000;
 // Load environment variables
 require("dotenv").config();
 
-// Middleware
-app.use(express.json());
 app.use(cors({
     origin: 'https://tap-ins.vercel.app',
     methods: ["GET", "POST", "PUT", "DELETE"],
@@ -19,7 +17,14 @@ app.use(cors({
     credentials: true
 }));
 
-app.options("*", cors());
+app.options("*", cors({
+    origin: "https://tap-ins.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}));
+
+//Middlewares
 app.use(express.json());
 app.use(cookieParser());
 
