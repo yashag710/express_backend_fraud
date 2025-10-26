@@ -13,11 +13,14 @@ require("dotenv").config();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: 'https://tap-ins.vercel.app/',
+    origin: 'https://tap-ins.vercel.app',
     methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
 }));
 
+app.options("*", cors());
+app.use(express.json());
 app.use(cookieParser());
 
 // Database connection
